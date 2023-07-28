@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import axios from 'axios';
+import { goToPostsPage, goToSignupPage } from '../routes/coordinator';
+import { BASE_URL, TOKEN_NAME } from '../constants/constants';
+import HorizontalLine from '../components/HorizontalLine';
+import LoginLogoIcon from '../images/login-logo.svg';
+import FooterIcon from '../images/footer-bar.svg';
 
 export const LoginPageContainer = styled.main`
     height: 100%;
@@ -19,8 +24,6 @@ export const LoginPageContainer = styled.main`
 `;
 
 export const HeaderSection = styled.section`
-    display: flex;
-    flex-direction: column;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,12 +98,10 @@ export default function LoginPage() {
 
     const login = (e) => {
         e.preventDefault()
-
         const body = {
             email: email,
             password: password
         }
-
         axios.post(BASE_URL + "/users/login", body)
             .then(res => {
                 window.localStorage.setItem(TOKEN_NAME, res.data.token)
@@ -114,18 +115,16 @@ export default function LoginPage() {
                 <img id="logo" src={LoginLogoIcon} alt="Logo da Labenu" />
                 <h1>Projeto LabEddit</h1>
             </HeaderSection>
-
             <FormSection>
                 <form onSubmit={login}>
                     <input placeholder="E-mail" type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     <input placeholder="Senha" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     <button className="primary" type="submit">Continuar</button>
                 </form>
-
-            <HorizontarLine />
+            <HorizontalLine />
             <button className="secondary" onClick={() => goToSignupPage(navigate)}>Crie uma conta!</button>
             </FormSection>
-            <img id="footer-bar" src={FooterBarIcon} alt="Barra horizontal de rodapé" />
+            <img id="footer-bar" src={FooterIcon} alt="Barra horizontal de rodapé" />
         </LoginPageContainer>    
     )
 };

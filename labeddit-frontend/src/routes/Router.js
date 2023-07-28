@@ -1,4 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PostsPage from '../pages/PostsPage';
+import LoginPage from '../pages/LoginPage';
+import SignupPage from '../pages/SignupPage';
+import CommentsPage from '../pages/CommentsPage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 export default function Router() {
     return (
